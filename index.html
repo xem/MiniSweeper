@@ -1,0 +1,152 @@
+﻿<!-- blah blah -->
+<style>
+  pre { background: #def; padding: 5px; width: 650px; font-family: monospace;}
+</style>
+<h1>MiniSweeper</h1>
+<h2>A minesweeper in <s>512</s> 735 bytes</h2>
+<pre>
+&lt;table border="" id="t">&lt;script>s=15;b=[];f=[];n=[];v=[];H="";h=1;g=l=r=0;p=func
+tion(a){if(!g){l&&(v[a]=1,b[a]&&(g=-1));r&&(f[a]=!f[a],g=1);for(m=1;m;){for(j=m=
+0;j&lt;s*s;j++)r&&b[j]==!f[j]&&(g=0),h&&(n[j]=0);for(j=0;j&lt;s*s;j++){J=~~(j/s);I=j%s
+;V="&lt;br>";h&&(H+=(j%s?"":"&lt;tr>")+"&lt;td id=c"+j+" align=center style=width:25;heig
+ht:25;background:#ddd onclick=l=1;p("+j+") oncontextmenu=r=1;p("+j+");return!1>"
++V,b[j]=0.1>Math.random());for(y=2;--y+2;)for(x=2;--x+2;)B=J+y,A=I+x,C=B*s+A,0<=
+B&&0<=A&&B&lt;s&&A&lt;s&&(h&&b[j]&&n[C]++,h||!v[j]||n[j]||v[C]||b[C]||(m=v[C]=1));if(v
+[j]||g)V=n[j]||V;b[j]&&g&&(V="💣");f[j]&&(V="⚑");!h&&(Z=this["c"+j],Z[z]=V,g||v[j
+])&&(Z.style.background=0)}}g&&alert(~g?"😁":"☹");l=r=h=0}};p();t[z="innerHTML"]=
+H&lt;/script> // 731
+</pre>
+
+<h2>Demo:</h2>
+- Left click to reveal a cell and see how many bombs are around.
+<br>
+- Don't click on bombs! Right click to set a flag where you believe there is a bomb.
+<br>
+- You win when all the bombs are flagged.
+<br>
+<br>
+
+<!-- Code golf -->
+
+<table border="" id="t"><script>s=15;b=[];f=[];n=[];v=[];H="";h=1;g=l=r=0;p=function(a){if(!g){l&&(v[a]=1,b[a]&&(g=-1));r&&(f[a]=!f[a],g=1);for(m=1;m;){for(j=m=0;j<s*s;j++)r&&b[j]==!f[j]&&(g=0),h&&(n[j]=0);for(j=0;j<s*s;j++){J=~~(j/s);I=j%s;V="<br>";h&&(H+=(j%s?"":"<tr>")+"<td id=c"+j+" align=center style=width:25;height:27;background:#ddd onclick=l=1;p("+j+") oncontextmenu=r=1;p("+j+");return!1>"+V,b[j]=0.1>Math.random());for(y=2;--y+2;)for(x=2;--x+2;)B=J+y,A=I+x,C=B*s+A,0<=B&&0<=A&&B<s&&A<s&&(h&&b[j]&&n[C]++,h||!v[j]||n[j]||v[C]||b[C]||(m=v[C]=1));if(v[j]||g)V=n[j]||V;b[j]&&g&&(V="💣");f[j]&&(V="⚑");!h&&(Z=this["c"+j],Z[z]=V,g||v[j])&&(Z.style.background=0)}}g&&alert(~g?"😁":"☹");l=r=h=0}};p();t[z="innerHTML"]=H</script>
+
+<!-- Original source code -->
+
+<script>
+/*
+
+s=15; // Grid size
+b=[]; // Bombs
+f=[]; // Flags
+n=[]; // Neighbours counters
+v=[]; // Viewed cells
+H=""; // HTML code
+h=1;  // Generate HTML
+g=    // Game over
+l=    // Left click
+r=0;  // Right click
+
+// All-purpose function
+p=function(i){
+  
+  // The game isn't over
+  if(!g){
+    
+    // Left click
+    if(l){
+      v[i]=1;
+      if(b[i]){
+        g=-1;
+      }
+    }
+    
+    // Right click
+    if(r){
+      f[i]=!f[i];
+      g=1;
+    }
+  
+    // While there's more to view
+    for(m=1;m;){
+      m=0;
+
+      // Test if the game is won
+      for(j=0;j<s*s;j++){
+        if(r && b[j] == !f[j]){
+          g=0;
+        }
+        if(h){
+          n[j]=0;
+        }
+      }
+
+      // Iterate
+      for(j=0;j<s*s;j++){
+        J=~~(j/s);
+        I=j%s;
+      
+        // Empty
+        V="<br>";
+        
+        // Generate HTML
+        if(h){
+          H+=(j%s?"":"<tr>")+"<td id=c"+j+" align=center style=width:23;background:#ddd onclick=l=1;p("+j+") oncontextmenu=r=1;p("+j+");return!1>"+V;
+          b[j]=Math.random()<.1;
+        }
+
+        // Iterate
+        for(y=2;--y+2;){
+          for(x=2;--x+2;){
+            B=J+y;
+            A=I+x;
+            C=B*s+A;
+            if(B>=0 && A>=0 && B<s && A<s){
+            
+              // Count neighbours
+              if(h && b[j]){
+                n[C]++;
+              }
+              
+              // Try to expand
+              if(!h && v[j] && !n[j] && !v[C] && !b[C]){
+                v[C]=1;
+                m=1;
+              }
+            }
+          }
+        }
+
+        // Render
+        if(v[j]||g){
+          V=n[j]||V;
+        }
+        if(b[j]&&g){
+          V="💣";
+        }
+        if(f[j]){
+          V="⚑";
+        }
+        if(!h){
+          Z=this["c"+j];
+          Z[z]=V;
+          if(g||v[j]){
+            Z.style.background=0;
+          }
+        }
+      }
+    }
+
+    // Won/lost
+    if(g){
+      alert(~g?"😁":"☹");
+    }
+    
+    // Reset state
+    l=r=h=0;
+  }
+}
+p();
+t[z="innerHTML"]=H;
+
+*/
+</script>
