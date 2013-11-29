@@ -1,9 +1,14 @@
 ﻿<!-- blah blah -->
 <style>
-  pre { background: #def; padding: 5px; width: 650px; font-family: monospace;}
+  body { width: 650px; margin: 20px auto; font-family: Calibri; }
+  pre { background: #def; padding: 5px; width: 650px; font-family: monospace; }
+  a.fork { float: right; background: #def; padding: 10px; }
 </style>
+<a class=fork href=//github.com/xem/MiniSweeper>Fork me!</a>
 <h1>MiniSweeper</h1>
-<h2>A minesweeper in <s>512</s> 735 bytes</h2>
+<h2>A minesweeper in <s>512</s> 685 bytes</h2>
+<b>Golfed by <a href=//twitter.com/MaximeEuziere>xem</a></b>
+<br>
 <pre>
 &lt;table border="" id="t">&lt;script>s=15;b=[];f=[];n=[];v=[];H="";h=1;g=l=r=0;p=func
 tion(a){if(!g){l&&(v[a]=1,b[a]&&(g=-1));r&&(f[a]=!f[a],g=1);for(m=1;m;){for(j=m=
@@ -14,7 +19,7 @@ ht:25;background:#ddd onclick=l=1;p("+j+") oncontextmenu=r=1;p("+j+");return!1>"
 B&&0<=A&&B&lt;s&&A&lt;s&&(h&&b[j]&&n[C]++,h||!v[j]||n[j]||v[C]||b[C]||(m=v[C]=1));if(v
 [j]||g)V=n[j]||V;b[j]&&g&&(V="💣");f[j]&&(V="⚑");!h&&(Z=this["c"+j],Z[z]=V,g||v[j
 ])&&(Z.style.background=0)}}g&&alert(~g?"😁":"☹");l=r=h=0}};p();t[z="innerHTML"]=
-H&lt;/script> // 731
+H&lt;/script> // 735 bytes (or 685 if we use JSCrush)
 </pre>
 
 <h2>Demo:</h2>
