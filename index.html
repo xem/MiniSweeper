@@ -1,25 +1,24 @@
 ﻿<!-- blah blah -->
 <style>
-  body { width: 650px; margin: 20px auto; font-family: Calibri; }
+  body { width: 650px; margin: 20px auto; font-family: arial; }
   pre { background: #def; padding: 5px; width: 650px; font-family: monospace; }
   a.fork { float: right; background: #def; padding: 10px; }
 </style>
 <a class=fork href=//github.com/xem/MiniSweeper>Fork me!</a>
 <h1>MiniSweeper</h1>
-<h2>A minesweeper in <s>512</s> 667 characters</h2>
+<h2>A minesweeper in 651 characters</h2>
 <b>Golfed by <a href=//twitter.com/MaximeEuziere>xem</a></b>
 <br>
 <pre>
-&lt;table border="" id="t">&lt;script>s=15;b=[];f=[];n=[];v=[];H="";h=1;g=l=r=0;p=func
-tion(a){if(!g){l&&(v[a]=1,b[a]&&(g=-1));r&&(f[a]=!f[a],g=1);for(m=1;m;){for(j=m=
-0;j&lt;s*s;j++)r&&b[j]==!f[j]&&(g=0),h&&(n[j]=0);for(j=0;j&lt;s*s;j++){J=~~(j/s);I=j%s
-;V="&lt;br>";h&&(H+=(j%s?"":"&lt;tr>")+"&lt;td id=c"+j+" align=center style=width:23;back
-ground:#ddd onclick=l=1;p("+j+") oncontextmenu=r=1;p("+j+");return!1>"+V,b[j]=0.
-1>Math.random());for(y=2;--y+2;)for(x=2;--x+2;)B=J+y,A=I+x,C=B*s+A,0<=B&&0<=A&&B
-&lt;s&&A&lt;s&&(h&&b[j]&&n[C]++,h||!v[j]||n[j]||v[C]||b[C]||(m=v[C]=1));!h&&(Z=this["c
-"+j],Z[z]=f[j]?"⚑":b[j]&&g?"💣":v[j]||g?n[j]||V:V,g||v[j])&&(Z.style.background=0
-)}}g&&alert(~g?"😁":"☹");l=r=h=0}};p();t[z="innerHTML"]=H&lt;/script>
-// 705 (667 with JScrush)
+&lt;table border id=t>&lt;script>s=25;b=[];f=[];n=[];v=[];H="";h=1;g=l=r=0;p=function(
+a){if(!g){l&&(v[a]=1,b[a]&&(g=-1));r&&(f[a]=!f[a],g=1);for(m=1;m;){for(j=m=0;j&lt;s
+*s;j++)r&&b[j]==!f[j]&&(g=0),h&&(n[j]=0);for(j=0;j&lt;s*s;j++){J=~~(j/s);I=j%s;V=" 
+ ";h&&(H+=(j%s?"":"&lt;tr>")+"&lt;td id=c"+j+" align=center bgcolor=ddddd onclick=l=1;
+p("+j+") oncontextmenu=r=1;p("+j+");return!1>"+V,b[j]=0.1>Math.random());for(y=2
+;--y+2;)for(x=2;--x+2;)B=J+y,A=I+x,C=B*s+A,0&lt;=B&&0&lt;=A&&B&lt;s&&A&lt;s&&(h&&b[j]&&n[C]+
++,h||!v[j]||n[j]||v[C]||b[C]||(m=v[C]=1));!h&&(Z=this["c"+j],Z[z]=f[j]?"⚑":b[j]&
+&g?"💣":v[j]||g?n[j]||V:V,g||v[j])&&(Z.style.background=0)}}g&&alert("☹ 😁"[g+1])
+;l=r=h=0}};p();t[z="innerHTML"]=H&lt;/script> // 681 (or 651 with JSCrush)
 </pre>
 
 <h2>Demo:</h2>
@@ -33,22 +32,15 @@ ground:#ddd onclick=l=1;p("+j+") oncontextmenu=r=1;p("+j+");return!1>"+V,b[j]=0.
 
 <!-- Code golf -->
 
-<!--
+<table border id=t><script>s=25;b=[];f=[];n=[];v=[];H="";h=1;g=l=r=0;p=function(a){if(!g){l&&(v[a]=1,b[a]&&(g=-1));r&&(f[a]=!f[a],g=1);for(m=1;m;){for(j=m=0;j<s*s;j++)r&&b[j]==!f[j]&&(g=0),h&&(n[j]=0);for(j=0;j<s*s;j++){J=~~(j/s);I=j%s;V="  ";h&&(H+=(j%s?"":"<tr>")+"<td id=c"+j+" align=center bgcolor=ddddd onclick=l=1;p("+j+") oncontextmenu=r=1;p("+j+");return!1>"+V,b[j]=0.1>Math.random());for(y=2;--y+2;)for(x=2;--x+2;)B=J+y,A=I+x,C=B*s+A,0<=B&&0<=A&&B<s&&A<s&&(h&&b[j]&&n[C]++,h||!v[j]||n[j]||v[C]||b[C]||(m=v[C]=1));!h&&(Z=this["c"+j],Z[z]=f[j]?"⚑":b[j]&&g?"💣":v[j]||g?n[j]||V:V,g||v[j])&&(Z.style.background=0)}}g&&alert("☹ 😁"[g+1]);l=r=h=0}};p();t[z="innerHTML"]=H</script>
 
-<table border="" id="t"><script>s=15;b=[];f=[];n=[];v=[];H="";h=1;g=l=r=0;p=function(a){if(!g){l&&(v[a]=1,b[a]&&(g=-1));r&&(f[a]=!f[a],g=1);for(m=1;m;){for(j=m=0;j<s*s;j++)r&&b[j]==!f[j]&&(g=0),h&&(n[j]=0);for(j=0;j<s*s;j++){J=~~(j/s);I=j%s;V="<br>";h&&(H+=(j%s?"":"<tr>")+"<td id=c"+j+" align=center style=width:23;background:#ddd onclick=l=1;p("+j+") oncontextmenu=r=1;p("+j+");return!1>"+V,b[j]=0.1>Math.random());for(y=2;--y+2;)for(x=2;--x+2;)B=J+y,A=I+x,C=B*s+A,0<=B&&0<=A&&B<s&&A<s&&(h&&b[j]&&n[C]++,h||!v[j]||n[j]||v[C]||b[C]||(m=v[C]=1));!h&&(Z=this["c"+j],Z[z]=f[j]?"⚑":b[j]&&g?"💣":v[j]||g?n[j]||V:V,g||v[j])&&(Z.style.background=0)}}g&&alert(~g?"😁":"☹");l=r=h=0}};p();t[z="innerHTML"]=H</script>
-
--->
-
-<!-- Demo: code golf + JSCrush -->
-
-<table border="" id="t"><script>_='s5;bfnvH="";h;g=l=r;p=functi(a){if(!g){lv,bg=-1)	rf=!f,g	m;m;){j=mr==!fg),hn	j{J=~~(j/s	I=j%s;V="<br>";hH+=(j%s?""<tr>")+"<td id=c+" align=center =width:23;:#ddd click=l ctextmenu=r;return!1>"+V,.1>Math.random()	yyxxB=J+y,A=I+x,C=B*s+A,0<=B0<=AB<sA<shn++,h!vnvb(m=v)	!hZ=this["c],Z[z]=f?"⚑g?"💣vg?nV:V,gv)Z..)}}galert(~g?"😁"☹"	l=r=h}};p(	t[z="innerHTML"]=H[j]&&for(;j<s*s;j++);p(+")=[];background(	);||=1=0[a][C]"+jstyle=2;--on":b+2;)';for(Y in $='	')with(_.split($[Y]))_=join(pop());eval(_)</script>
 
 <!-- Original source code -->
 
+<!--
+<table border id=t>
 <script>
-
-/*
-s=15; // Grid size
+/*s=25; // Grid size
 b=[]; // Bombs
 f=[]; // Flags
 n=[]; // Neighbours counters
@@ -99,11 +91,11 @@ p=function(i){
         I=j%s;
       
         // Empty
-        V="<br>";
+        V="  ";
         
         // Generate HTML
         if(h){
-          H+=(j%s?"":"<tr>")+"<td id=c"+j+" align=center style=width:23;background:#ddd onclick=l=1;p("+j+") oncontextmenu=r=1;p("+j+");return!1>"+V;
+          H+=(j%s?"":"<tr>")+"<td id=c"+j+" align=center bgcolor=eeeee onclick=l=1;p("+j+") oncontextmenu=r=1;p("+j+");return!1>"+V;
           b[j]=Math.random()<.1;
         }
 
@@ -142,7 +134,7 @@ p=function(i){
 
     // Won/lost
     if(g){
-      alert(~g?"😁":"☹");
+      alert(["☹ 😁"][g+1]);
     }
     
     // Reset state
@@ -150,6 +142,6 @@ p=function(i){
   }
 }
 p();
-t[z="innerHTML"]=H;
-*/
+t[z="innerHTML"]=H;*/
 </script>
+-->
