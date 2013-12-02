@@ -1,23 +1,26 @@
 ﻿<!-- blah blah -->
 <style>
   body { width: 650px; margin: 20px auto; font-family: arial; }
-  textarea { height: 180px; background: #def; padding: 5px; width: 650px; font-family: monospace; overflow: hidden; }
+  textarea { height: 170px; background: #def; padding: 5px; width: 650px; font-family: monospace; overflow: hidden; }
   a.fork { float: right; background: #def; padding: 10px; }
 </style>
 <a class=fork href=//github.com/xem/MiniSweeper>Fork me!</a>
 <h1>MiniSweeper</h1>
-<h2>A minesweeper in 600 characters</h2>
+<h2>A minesweeper in 580 characters</h2>
 <b>Golfed by <a href=//twitter.com/MaximeEuziere>xem</a></b>
 <br>
 <br>
 <textarea>
-<table border id=t><script>s=10;b=[];f=[];n=[];v=[];g=0;function r(a){H="";for(i=0;i<s;i++)for(j=0;j<s;j++){I=i*s+j;if(a)for(b[I]=0.1>Math.random(),x=2;--x+2;)for(y=2;--y+2;)A=i+x,B=j+y,C=A*s+B,~A&&~B&&A<s&&B<s&&b[I]&&(n[C]=n[C]+1||1);H+=(j?"":"<tr>")+"<td onclick=g||c("+I+") oncontextmenu=g||m("+I+");return!1 align=center bgcolor="+(v[I]||g?"white":"grey")+">"+(f[I]?"⚑":b[I]&&g?"💣":n[I]&&(v[I]||g)?n[I]:"  ")}t.innerHTML=H}function c(a){v[a]=M=1;for(b[a]&&g--;M;)for(a=M=0;a<s;a++)for(j=0;j<s;j++)for(I=a*s+j,x=2;--x+2;)for(y=2;--y+2;)A=a+x,B=j+y,C=A*s+B,!v[I]&&!b[I]&&v[C]&&!n[C]&&~A&&~B&&A<s&&B<s&&(v[I]=M=1);r()}function m(a){f[a]=!f[a];g=1;for(a=0;a<s*s;a++)b[a]==!f[a]&&(g=0);r()}r(1)</script> // 703 (600 with JSCrush)
+<table border id=t><script>s=10;b=[];f=[];n=[];v=[];g=0;function r(a,c,d){c&&(v[a]=1,b[a]&&g--);for(M=1;M;)for(M=0,H="",a=0;a<s;a++)for(j=0;j<s;j++){I=a*s+j;d&&(T=b[I]=0.1>Math.random());for(x=2;--x+2;)for(y=2;--y+2;)A=a+x,B=j+y,C=A*s+B,~A&&~B&&A<s&&B<s&&(s&&T&&(n[C]=~~n[C]+1),!c||v[I]||b[I]||!v[C]||n[C]||(v[I]=M=1));H+=(j?"":"<tr>")+"<td onclick=g||r("+I+",1) oncontextmenu=g||(f["+I+"]=!f["+I+"]);g=1;for(a=0;a<s*s;a++)b[a]==!f[a]&&(g=0);r();return!1 align=center bgcolor="+(v[I]||g?"white":"grey")+">"+(f[I]?"⚑":b[I]&&g?"💣":n[I]&&(v[I]||g)?n[I]:"  ")}t.innerHTML=H}r(0,0,1)</script>
+<!-- 587 chars / 580 with JScrush -->
 </textarea>
 
 <h2>Demo:</h2>
 - Left click to reveal a cell and see how many bombs are around.
 <br>
-- Don't click on bombs! Right click to set a flag where you believe there is a bomb.
+- Right click to set a flag where you believe there is a bomb.
+<br>
+- You lose if you reveal a bomb.
 <br>
 - You win when all the bombs are flagged.
 <br>
@@ -25,8 +28,7 @@
 
 <!-- Code golf -->
 
-<table border id=t><script>_='s0;bfnvgr{H="";ii;i{I=ij;ifb=0.1>Math.random()ib(n=n+11);H+=(j"<tr>+"<td click=gc ctextmenu=gm;return!1 align=center bgcolor="+white"grey+">"+(f⚑bg💣n)?n:"  }t.innerHTML=H}c{v	=M;b	g--;M;)a=Ma;aI=aja!v!bv!n(v=Mm{f	;g;aa*s;ab	=(g=0r(1),xxyyA=for([I]~A~BABfuncti +x,B=j+y,C=AB,jj;j&&	[a]=[];=0;(a)[C]("+I+<s);r()}(vg++)*s+=2;--=1on||?"":")+2;)=!f	';for(Y in $='	')with(_.split($[Y]))_=join(pop());eval(_)</script>
-
+<table border id=t><script>_='s0;bfnvg;functi a,c,d){cv,bg--M;M;)M,H="",j;j<s;j++){I=a*s+j;dT=b.1>Math.random()xxyyA=a+x,B=j+y,C=A*s+B,~A~BA<sB<ssTn	=~~n	+1),!cb!v	n	(v=M)H+=(j"<tr><td click=g,1) ctextmenu=g(=!g;s*b==!fgreturn!1 align=center bgcolor="+(gwhite"grey>"+(f⚑bg💣ng)?n:"  ")}t.innerHTML=H}0,0,1)[I]fo&&=[];||"+I+"=0[a]	[C]);(s;a++)=1r(v=2;--a;a<on?"":+2;)")+"f[]';for(Y in $='	')with(_.split($[Y]))_=join(pop());eval(_)</script>
 
 <!-- Original source code -->
 
@@ -41,116 +43,80 @@ v = []; // Viewed
 g = 0;  // Game over (-1: lost, 1: won)
 
 // Render
-function r(S){
+// i: index
+// L: left click
+// S: start
+function r(i,L,S){
   
-  // Reset HTML
-  H="";
-  
-  // Loop on cells
-  for(i=0;i<s;i++){
-    for(j=0;j<s;j++){
-      
-      I = i*s+j;
+  // Left click: view cell
+  if(L){
+    v[i]=1;
     
-      // At start
-      if(S){
+    // Bomb: game over
+    if(b[i]){
+      g--;
+    }
+  }
+
+  // While there's more to show
+  for(M=1;M;){
+    
+    // Assume there's nothing more to show
+    M=0;
+    
+    // Reset HTML
+    H="";
+    
+    // Loop on cells
+    for(i=0;i<s;i++){
+      for(j=0;j<s;j++){
+        
+        // Cell index
+        I = i*s+j;
       
-        // Set bomb randomly
-        b[I]=Math.random()<.1;
+        // At start, set bomb randomly
+        if(S){
+          T=b[I]=Math.random()<.1;
+        }
 
         // Loop on neighbours
         for(x=2;--x+2;){
           for(y=2;--y+2;){
           
+            // Neighbour coordinates and index
             A=i+x;
             B=j+y;
             C=A*s+B;
+
+            // If the neighbour is in bounds
+            if(~A && ~B && A < s && B < s){
             
-            
-            // If the neighbour is in the grid and current cell has a bomb
-            if(~A && ~B && A < s && B < s && b[I]){
+              // At start, if current cell has a bomb
+              if(s && T){
               
-              // Increment neighbour cell's counters
-              n[C]=n[C]+1||1;
+                // Increment neighbour cell's counters
+                n[C]=~~n[C]+1;
+              }
+            
+              // On left click, if the current cell isn't visible and doesn't have a bomb, and the neighbour is visible and hasn't got neighbours
+              if(L && !v[I] && !b[I] && v[C] && !n[C]){
+                
+                // Show current cell and assume there's more to show
+                v[I]=M=1;
+              }
             }
           }
         }
+        
+        // Fill HTML
+        H+=(j?"":"<tr>")+"<td onclick=g||r("+I+",1) oncontextmenu=g||(f["+I+"]=!f["+I+"]);g=1;for(a=0;a<s*s;a++)b[a]==!f[a]&&(g=0);r();return!1 align=center bgcolor="+(v[I]||g?"white":"grey")+">"+(f[I]?"⚑":((b[I]&&g)?"💣":((n[I]&&(v[I]||g))?n[I]:"  ")));
       }
-      
-      // Fill HTML
-      H+=(j?"":"<tr>")+"<td onclick=g||c("+I+") oncontextmenu=g||m("+I+");return!1 align=center bgcolor="+(v[I]||g?"white":"grey")+">"+(f[I]?"⚑":((b[I]&&g)?"💣":((n[I]&&(v[I]||g))?n[I]:"  ")));
     }
   }
   
   // Write HTML in table
   t.innerHTML=H;
 }
-
-// Left click
-function c(i){
-  
-  // View cell
-  v[i]=M=1;
-  
-  // Bomb: game over
-  if(b[i]){
-    g--;
-  }
-  
-  // While there's more to show
-  for(;M;){
-    M=0;
-    
-    // Loop on cells
-    for(i=0;i<s;i++){
-      for(j=0;j<s;j++){
-      
-        I = i*s+j;
-        
-        // Loop on neighbours
-        for(x=2;--x+2;){
-          for(y=2;--y+2;){
-          
-            A=i+x;
-            B=j+y;
-            C=A*s+B;
-            
-            
-            // If the current cell isn't visible and doesn't have a bomb, and the neighbour is visible, without neighbours and in the grid
-            if(!v[I] && !b[I] && v[C] && !n[C] && ~A && ~B && A < s && B < s){
-              
-              // Show current cell and assume there's more to show
-              v[I]=M=1;
-            }
-          }
-        }
-      }
-    }
-  }
-  r();
-}
-
-// Right click
-function m(i){
-  
-  // Set/unset flag
-  f[i]=!f[i];
-  
-  // Assume the game is won
-  g=1;
-  
-  // Loop
-  for(i=0;i<s*s;i++){
-    
-    // Bomb != Flag: not won
-    if(b[i]==!f[i]){
-      g=0;
-    }
-  }
-  
-  // Render
-  r();
-}
-r(1)
+r(0,0,1)
 </script>
 -->
