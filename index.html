@@ -2,7 +2,7 @@
 
 <style>
   body { width: 650px; margin: 20px auto; font-family: arial; }
-  textarea { height: 180px; background: #def; padding: 5px; width: 650px; font-family: monospace; overflow: hidden; }
+  textarea { height: 160px; background: #def; padding: 5px; width: 650px; font-family: monospace; overflow: hidden; }
   a.fork { float: right; background: #def; padding: 10px; }
 </style>
 <a class=fork href=//github.com/xem/MiniSweeper>Fork me!</a>
@@ -29,7 +29,7 @@
 
 <!-- Demo -->
 
-<div id=crushed></div>
+<div id=demo></div>
 
 <!-- templating -->
 
@@ -37,19 +37,12 @@
 <script>
   $(function(){
     $.ajax("src/raw.html?" + Math.random()).done(function(data){
-      data=data.replace("\\u2691","\u2691")
-               .replace("\\uD83D\\uDCA3","\uD83D\uDCA3")
-               .replace("\\u2001\\u2002","\u2001\u2002");
-      $("#minified").text(data + '\n<!-- ' + (data.length + 5) + ' bytes minified, ');
-    });
-
-    $.ajax("src/crushed.html?" + Math.random()).done(function(data){
-      data=data.replace("\\u2691","\u2691")
-               .replace("\\uD83D\\uDCA3","\uD83D\uDCA3")
-               .replace("\\u2001\\u2002","\u2001\u2002");
+      data=data.replace("\\u2691","\u2691") // Flag (1 char, 2 bytes)
+               .replace("\\uD83D\\uDCA3","\uD83D\uDCA3") // Bomb (2 chars, 4 bytes)
+               .replace("\\u2001\\u2002","\u2001\u2002"); // Space (2 chars, 4 bytes)
+      $("#minified").text(data);
+      $("#demo").html(data);
       $("#count").text(data.length + 5);
-      $("#minified").append((data.length + 5) + ' bytes crushed -->');
-      $("#crushed").html(data);
     });
   });
 </script>
