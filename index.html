@@ -47,7 +47,7 @@
       data=data.replace("\\u2691","\u2691")
                .replace("\\uD83D\\uDCA3","\uD83D\uDCA3")
                .replace("\\u2001\\u2002","\u2001\u2002");
-      $("#count").text(data.length);
+      $("#count").text(data.length + 5);
       $("#minified").append((data.length + 5) + ' bytes crushed -->');
       $("#crushed").html(data);
     });
