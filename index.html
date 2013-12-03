@@ -1,4 +1,4 @@
-﻿<!-- blah blah -->
+<!-- blah blah -->
 <style>
   body { width: 650px; margin: 20px auto; font-family: arial; }
   textarea { height: 170px; background: #def; padding: 5px; width: 650px; font-family: monospace; overflow: hidden; }
@@ -6,13 +6,13 @@
 </style>
 <a class=fork href=//github.com/xem/MiniSweeper>Fork me!</a>
 <h1>MiniSweeper</h1>
-<h2>A minesweeper in 580 characters</h2>
+<h2>A minesweeper in 574 bytes</h2>
 <b>Golfed by <a href=//twitter.com/MaximeEuziere>xem</a></b>
 <br>
 <br>
 <textarea>
-<table border id=t><script>s=10;b=[];f=[];n=[];v=[];g=0;function r(a,c,d){c&&(v[a]=1,b[a]&&g--);for(M=1;M;)for(M=0,H="",a=0;a<s;a++)for(j=0;j<s;j++){I=a*s+j;d&&(T=b[I]=0.1>Math.random());for(x=2;--x+2;)for(y=2;--y+2;)A=a+x,B=j+y,C=A*s+B,~A&&~B&&A<s&&B<s&&(s&&T&&(n[C]=~~n[C]+1),!c||v[I]||b[I]||!v[C]||n[C]||(v[I]=M=1));H+=(j?"":"<tr>")+"<td onclick=g||r("+I+",1) oncontextmenu=g||(f["+I+"]=!f["+I+"]);g=1;for(a=0;a<s*s;a++)b[a]==!f[a]&&(g=0);r();return!1 align=center bgcolor="+(v[I]||g?"white":"grey")+">"+(f[I]?"⚑":b[I]&&g?"💣":n[I]&&(v[I]||g)?n[I]:"  ")}t.innerHTML=H}r(0,0,1)</script>
-<!-- 587 chars / 580 with JScrush -->
+&lt;table border id=t>&lt;script>s=10;b=[];f=[];n=[];v=[];g=0;function r(a,c,d){c&amp;&amp;(v[a]=1,b[a]&amp;&amp;g--);for(M=1;M;)for(M=H=a="";a&lt;s;a++)for(j=0;j&lt;s;j++){I=a*s+j;d&amp;&amp;(T=b[I]=0.1>Math.random());for(x=2;~x--;)for(y=2;~y--;)A=a+x,B=j+y,C=A*s+B,~A&amp;&amp;~B&amp;&amp;A&lt;s&amp;&amp;B&lt;s&amp;&amp;(s&amp;&amp;T&amp;&amp;(n[C]=-~n[C]),!c||v[I]||b[I]||!v[C]||n[C]||(v[I]=M=1));H+=(j?"":"&lt;tr>")+"&lt;td onclick=g||r("+I+",1) oncontextmenu=g||(f["+I+"]=!f["+I+"]);g=1;for(a=0;a&lt;s*s;a++)b[a]==!f[a]&amp;&amp;(g=0);r();return!1 align=center bgcolor="+(v[I]||g?"":"grey")+">"+(f[I]?"⚑":b[I]&amp;&amp;g?"💣":n[I]&amp;&amp;(v[I]||g)?n[I]:"  ")}t.innerHTML=H}r(0,0,1)&lt;/script>
+<!-- 583 bytes / 574 with JScrush -->
 </textarea>
 
 <h2>Demo:</h2>
@@ -28,7 +28,7 @@
 
 <!-- Code golf -->
 
-<table border id=t><script>_='s0;bfnvg;functi a,c,d){cv,bg--M;M;)M,H="",j;j<s;j++){I=a*s+j;dT=b.1>Math.random()xxyyA=a+x,B=j+y,C=A*s+B,~A~BA<sB<ssTn	=~~n	+1),!cb!v	n	(v=M)H+=(j"<tr><td click=g,1) ctextmenu=g(=!g;s*b==!fgreturn!1 align=center bgcolor="+(gwhite"grey>"+(f⚑bg💣ng)?n:"  ")}t.innerHTML=H}0,0,1)[I]fo&&=[];||"+I+"=0[a]	[C]);(s;a++)=1r(v=2;--a;a<on?"":+2;)")+"f[]';for(Y in $='	')with(_.split($[Y]))_=join(pop());eval(_)</script>
+<table border id=t><script>_='s0;bfnvg;functi a,c,d){cv,bg--	M;M;)M=H=a="";a<j;j;j++){I=a*s+j;dT=b.1>Math.random()	xxyyA=a+x,B=j+y,C=A*s+B,~A~BABsTn=-~n),!cb!vn(v=M)	H+=(j<tr><td click=g,1) ctextmenu=g(=!	g;a;a*b==!fg		return!1 align=center bgcolor="+(ggrey>"+(f?"⚑":bg?"💣":ng)?n:"  ")}t.innerHTML=H}0,0,1)[I]fo&&=[];||"+I+"[a][C]	);(s;a++)=1=0r(v?"":"on<s=2;~--;)")+"f[]';for(Y in $='	')with(_.split($[Y]))_=join(pop());eval(_)</script>
 
 <!-- Original source code -->
 
@@ -119,4 +119,5 @@ function r(i,L,S){
 }
 r(0,0,1)
 </script>
+
 -->
