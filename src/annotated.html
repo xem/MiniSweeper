@@ -1,0 +1,86 @@
+<table border id=t>
+<script>
+s = 10; // Grid size
+b = []; // Bombs
+f = []; // Flags
+n = []; // Neighbours
+v = []; // Viewed
+g = 0;  // Game over (-1: lost, 1: won)
+
+// Render
+// i: index
+// L: left click
+// S: start
+function r(i,L,S){
+  
+  // Left click: view cell
+  if(L){
+    v[i]=1;
+    
+    // Bomb: game over
+    if(b[i]){
+      g--;
+    }
+  }
+
+  // While there's more to show
+  for(M=1;M;){
+    
+    // Assume there's nothing more to show
+    M=0;
+    
+    // Reset HTML
+    H="";
+    
+    // Loop on cells
+    for(i=0;i<s;i++){
+      for(j=0;j<s;j++){
+        
+        // Cell index
+        I = i*s+j;
+      
+        // At start, set bomb randomly
+        if(S){
+          T=b[I]=Math.random()<.1;
+        }
+
+        // Loop on neighbours
+        for(x=2;--x+2;){
+          for(y=2;--y+2;){
+          
+            // Neighbour coordinates and index
+            A=i+x;
+            B=j+y;
+            C=A*s+B;
+
+            // If the neighbour is in bounds
+            if(~A && ~B && A < s && B < s){
+            
+              // At start, if current cell has a bomb
+              if(s && T){
+              
+                // Increment neighbour cell's counters
+                n[C]=~~n[C]+1;
+              }
+            
+              // On left click, if the current cell isn't visible and doesn't have a bomb, and the neighbour is visible and hasn't got neighbours
+              if(L && !v[I] && !b[I] && v[C] && !n[C]){
+                
+                // Show current cell and assume there's more to show
+                v[I]=M=1;
+              }
+            }
+          }
+        }
+        
+        // Fill HTML
+        H+=(j?"":"<tr>")+"<td onclick=g||r("+I+",1) oncontextmenu=g||(f["+I+"]=!f["+I+"]);g=1;for(a=0;a<s*s;a++)b[a]==!f[a]&&(g=0);r();return!1 align=center bgcolor="+(v[I]||g?"white":"grey")+">"+(f[I]?"⚑":((b[I]&&g)?"💣":((n[I]&&(v[I]||g))?n[I]:"  ")));
+      }
+    }
+  }
+  
+  // Write HTML in table
+  t.innerHTML=H;
+}
+r(0,0,1)
+</script>
