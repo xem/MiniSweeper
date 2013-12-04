@@ -1,23 +1,32 @@
 <style>
+  h1, h2 { text-align: center; margin: 5px 0; }
+  h1 { font-size: 40px; }
+  h2 { font-size: 28px; }
+  h3 { font-size: 24px; margin: 5px 0; }
   body { width: 650px; margin: 20px auto; font-family: arial; }
-  textarea { height: 140px; background: #def; padding: 5px; width: 650px; font-family: monospace; overflow: hidden; }
-  a.fork { float: right; background: #def; padding: 10px; }
+  textarea { height: 140px; background: #def; padding: 5px; width: 650px; font-family: monospace; overflow: hidden; resize: none; }
+  a.fork { position: absolute; right: 0; top: 0; background: #000; color: #fff; padding: 10px; }
   a.right { float: right; }
 </style>
-<a class=fork href=//github.com/xem/MiniSweeper>Fork me!</a>
-<h1>MiniSweeper</h1>
-<h2>A HTML/JS minesweeper in <span id=count></span> bytes</h2>
-<b>Golfed by <a href=//twitter.com/MaximeEuziere>xem</a> and <a href=//twitter.com/subzey>Subzey</a></b>
-<br>
-<br>
-<br>
 
-<textarea id=minified></textarea>
+<a href=//github.com/xem/MiniSweeper><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+
+<h1>MiniSweeper</h1>
+<h2>A HTML/JavaScript minesweeper in <span id=count></span> bytes</h2>
+<br>
+<h3>Source code:</h3>
+<b>Golfed by <a href=//twitter.com/MaximeEuziere>xem</a> and <a href=//twitter.com/subzey>subzey</a></b>
+<br>
+<br>
+<textarea id=minified resize=none></textarea>
 <a class=right href=//raw.github.com/xem/MiniSweeper/gh-pages/src/annotated.html target=_blank>Annotated source</a>
 <br>
-
 <br>
-<h2>Demo:</h2>
+<br>
+<h3>Demo:</h3>
+<b>Best viewed on Firefox / IE</b>
+<br>
+<br>
 - Left click to reveal a cell and see how many bombs are around.
 <br>
 - Right click to set a flag where you believe there is a bomb.
@@ -39,9 +48,9 @@
   }
   $(function(){
     $.ajax("src/raw.html?" + Math.random()).done(function(data){
-      data=data.replace("\\u2691","\u2691") // Flag (1 char, 2 bytes)
-               .replace("\\uD83D\\uDCA3","\uD83D\uDCA3") // Bomb (2 chars, 4 bytes)
-               .replace("\\u2001\\u2002","\u2001\u2002"); // Space (2 chars, 4 bytes)
+      data=data.replace("\\u2691","\u2691") // Flag
+               .replace("\\uD83D\\uDCA3","\uD83D\uDCA3") // Bomb
+               .replace("\\u2001\\u2002","\u2001\u2002"); // Space
       $("#minified").text(data);
       $("#demo").html(data);
       $("#count").text(utf8bytes(data));
