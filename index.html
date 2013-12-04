@@ -32,6 +32,11 @@
 
 <script src=//code.jquery.com/jquery-1.10.2.min.js></script>
 <script>
+  function utf8bytes(str){
+    return str.replace(/([\uD800-\uDBFF][\uDC00-\uDFFF])|([\u0800-\uFFFF])|([\u0080-\u07FF])/g, function(_,a,b,c){
+      return a?'????':b?'???':'??';
+    }).length;
+  }
   $(function(){
     $.ajax("src/raw.html?" + Math.random()).done(function(data){
       data=data.replace("\\u2691","\u2691") // Flag (1 char, 2 bytes)
@@ -39,7 +44,7 @@
                .replace("\\u2001\\u2002","\u2001\u2002"); // Space (2 chars, 4 bytes)
       $("#minified").text(data);
       $("#demo").html(data);
-      $("#count").text(data.length + 5);
+      $("#count").text(utf8bytes(data));
     });
   });
 </script>
