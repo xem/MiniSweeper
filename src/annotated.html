@@ -1,5 +1,6 @@
 <table border id=t>
 <script>
+
 // Initialize 4 arrays of data and one game state:
 // b: bombs
 // v: viewed cells
@@ -15,53 +16,65 @@ n = [];
 // @param d: grid dimension (d * d-1)
 function r(d){
 
-  // While there are more cells to show and field is not locked
+  // While there are more cells to show and the field is not locked
   // Set lock flag to be equal to gameover. It should be made anytime after M assignment
   for(M = !l; M; l = g){
     
     // Loop on lines, reset HTML, assume there are no more cells to show
     for(a = M = H = ""; s > ++a;){
     
-      // Loop on columns, write HTML
-      for(j = s, H += "<tr>"; ~--j;){
-        
-        // Cell index
-        I = a * s + j;
-        
-        // At start, set bombs randomly
-        T = d ? b[I] = .1 > Math.random() : 0;
+      // Loop on columns, generate HTML
+      for
+      (
+        j = s,
+        H += "<tr>";
+        ~--j;
+        H += "<th onclick=b[i=" + I + "]?g--:v[i]=1;r() oncontextmenu=for(f[" + I + "]^=g=1,a=0;a<s*s;)b[a]^f[a++]?g=0:0;r();return!1 " + (v[I] | g || "bgcolor=tan") + ">" + (f[I] ? "\u2691" : b[I] & g ? "\uD83D\uDCA3" : n[I] && v[I] | g ? n[I] : "\u2001\u2002")
+      )
+      {
         
         // Loop on neighbours
-        for(x=2;~x--;){
-          for(y=2;~y--;){
+        for
+        (
           
+          // Compute cell index
+          I = a * s + j,
+          
+          // At start, set bomb randomly in the cell
+          T = d ? b[I] = .1 > Math.random() : 0,
+          x = 2;
+          ~x--;
+        )
+        {
+          for
+          (
+            y = 2;
+            ~y--;
+             
+            // If the neighbour is in bounds
+            ~A && ~B && A < s & B < s ?
+            
+            // If there is a bomb in the cell, inrement neighbours' counters
+            (n[C] = ~~n[C] + T) || v[I] | b[I] | !v[C] ? 0 : v[I] = M = 1 :
+            0;
+          )
+          {
+
             // Compute coordinates and index of neighbour
             A = a + x,
             B = j + y,
-            C = A * s + B,
+            C = A * s + B;
             
-            // If neighbour is in bounds
-            ~A && ~B && A < s & B < s && 
-            (
-              // At start, count neighbours
-              s && T ? n[C] = -~n[C] : 0,
-              
-              // On left click reveal cell and assume there's more to show
-              v[I] || b[I] || !v[C] || n[C] || (v[I] = M = 1)
-            );
+            // Update HTML
+            t.innerHTML = H;
           }
         }
-        
-        // Write current cell's HTML and handle events
-        // Left click on the cell: reveal cell, render
-        // Right click on the cell: set/unset flag, render
-        H += "<td onclick=v[i=" + I + "]=1;b[i]&&g--;r() oncontextmenu=for(f[i=" + I + "]=!f[i],g=1,a=0;a<s*s;a++)b[a]^!f[a]?0:g=0;r();return!1 " + (v[I] | g || "bgcolor=tan") + "><center>" + (f[I] ? "\u2691" : b[I] && g ? "\uD83D\uDCA3" : n[I] && (v[I] || g) ? n[I] : "\u2001\u2002");
       }
     }
   }
-  t.innerHTML = H;
 }
 
 // Render the grid
 r(s = 9);
+
 </script>
