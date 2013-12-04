@@ -11,17 +11,17 @@ f = [g = 0];
 n = [];
 
 // Rendering function
-// @param d: grid dimension (d*d)
+// @param d: grid dimension (d * d-1)
 function r(d){
 
   // While there are more cells to show
   for(M = 1; M;){
     
     // Loop on lines, reset HTML, assume there are no more cells to show
-    for(M = H = a = ""; a < s; a++){
+    for(a = M = H = ""; s > ++a;){
     
       // Loop on columns, write HTML
-      for(j = 0, H += "<tr>"; j < s; j++){
+      for(j = s, H += "<tr>"; ~--j;){
         
         // Cell index
         I = a * s + j;
@@ -53,7 +53,7 @@ function r(d){
         // Write current cell's HTML and handle events
         // Left click on the cell: reveal cell, render
         // Right click on the cell: set/unset flag, render
-        H += "<td onclick=g||(v[i=" + I + "]=1,b[i]&&g--,r()) oncontextmenu=if(!g)for(f[i=" + I + "]=!f[i],g=1,a=0;a<s*s;a++)b[a]^!f[a]?0:g=0;r();return!1 " + (v[I] | g || "bgcolor=red") + "><center>" + (f[I] ? "\u2691" : b[I] && g ? "\uD83D\uDCA3" : n[I] && (v[I] || g) ? n[I] : "\u2001\u2002");
+        H += "<td onclick=g||(v[i=" + I + "]=1,b[i]&&g--,r()) oncontextmenu=if(!g)for(f[i=" + I + "]=!f[i],g=1,a=0;a<s*s;a++)b[a]^!f[a]?0:g=0;r();return!1 " + (v[I] | g || "bgcolor=tan") + "><center>" + (f[I] ? "\u2691" : b[I] && g ? "\uD83D\uDCA3" : n[I] && (v[I] || g) ? n[I] : "\u2001\u2002");
       }
     }
   }
@@ -61,5 +61,5 @@ function r(d){
 }
 
 // Render the grid
-r(s = 15);
+r(s = 9);
 </script>
