@@ -6,16 +6,18 @@
 // f: flags
 // n: neighbours
 // g: gameover (1 win, -1 lost)
+// l: field is locked (boolean)
 b = [v = []];
-f = [g = 0];
+f = [l = g = 0];
 n = [];
 
 // Rendering function
 // @param d: grid dimension (d * d-1)
 function r(d){
 
-  // While there are more cells to show
-  for(M = 1; M;){
+  // While there are more cells to show and field is not locked
+  // Set lock flag to be equal to gameover. It should be made anytime after M assignment
+  for(M = !l; M; l = g){
     
     // Loop on lines, reset HTML, assume there are no more cells to show
     for(a = M = H = ""; s > ++a;){
@@ -53,7 +55,7 @@ function r(d){
         // Write current cell's HTML and handle events
         // Left click on the cell: reveal cell, render
         // Right click on the cell: set/unset flag, render
-        H += "<td onclick=g||(v[i=" + I + "]=1,b[i]&&g--,r()) oncontextmenu=if(!g)for(f[i=" + I + "]=!f[i],g=1,a=0;a<s*s;a++)b[a]^!f[a]?0:g=0;r();return!1 " + (v[I] | g || "bgcolor=tan") + "><center>" + (f[I] ? "\u2691" : b[I] && g ? "\uD83D\uDCA3" : n[I] && (v[I] || g) ? n[I] : "\u2001\u2002");
+        H += "<td onclick=v[i=" + I + "]=1;b[i]&&g--;r() oncontextmenu=for(f[i=" + I + "]=!f[i],g=1,a=0;a<s*s;a++)b[a]^!f[a]?0:g=0;r();return!1 " + (v[I] | g || "bgcolor=tan") + "><center>" + (f[I] ? "\u2691" : b[I] && g ? "\uD83D\uDCA3" : n[I] && (v[I] || g) ? n[I] : "\u2001\u2002");
       }
     }
   }
